@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            font-family: sans-serif;
+        }
+        body{
+           
+            background-color:#0c1a25;
+
+        }
+    #movie-name{
+        height: 30px;
+        border: none;
+        padding: 2px;
+        outline: none;
+    }
+    
+    #movie-div{
+        width:80% ;
+        display: grid;
+        grid-template-columns: repeat(6,16%);
+        gap: 4%;
+        margin: 1% 0 0 3% ;
+
+    }
+    img{
+        width: 200px;
+        height: 300px;
+    }
+    #navbarContainer{
+         width: 100%;
+         height: 110px;
+    }
+    #nav-container{
+        width: 100%;
+        height: 80px;
+        display: flex;
+        background-color:#0c1a25;
+        position:sticky;
+        top: 0;
+        z-index: 100;
+                
+    }
+    #navbar-left{
+        width: 50%;
+        display: flex;
+        align-items: center;
+        margin: 3%;
+
+    }
+    .navbar-menu{
+        color: white;
+        font-weight:600;
+        margin: 0 2%;
+    }
+    
+    #navbar-right{
+        width: 50%;
+        display: flex;
+        align-items: center;
+    }
+    #searchbar{
+        width: 85%;
+       
+        align-items: center;
+        margin:0 0 0 10%;
+    }
+    #search-logo{
+        width: 20px;
+        height: 20px;
+        color: white;
+    }
+    .disney-logo{
+        height: 55px;
+        width: 26%;
+    }
+    .vertline{
+        color: white;
+        height: 22px;
+        width: 22px;
+        margin-right: 10px;
+    }
+    .search{
+        color: white;
+        background-color:#0c1a25 ;
+    }
+    #search-button{
+        width: 85%;
+        display: flex;
+    }
+    .search-drop{
+         display: flex;
+          margin:  0 5% 0 57% ;
+          
+       
+       
+      
+    }
+    .hline{
+        width: 85%;
+        height: 1px;
+        background-color: white;
+    }
+    #login-btn{
+        color: white;
+        font-weight: 600;
+        margin-right:  6%;
+
+    }
+    #subscribe-btn{
+        width: 22%;
+        height: 20px;
+        padding: 3px 10px;
+        border-radius: 4px;
+        color: white;
+        background-color: blue;
+        text-align: center;
+        margin:0 3%;
+    }
+    .slide-img{
+        width: 100%;
+        height: 400px;
+    }.slidebar1{
+        width: 98%;
+        
+        
+        padding: 2px;
+        margin: 0 3%;
+    }
+    .poster-hover:hover{
+        border-radius: 7px;
+        transform:scale(1.1) ;
+    }
+    .category-text{
+        color: white;
+        font-size: 20px;
+        margin:3% 0 0 3% ;
+    }
+    </style>
+</head>
+<body>
+    <div id="navbarContainer">
+    <div id="nav-container">
+        <div id="navbar-left" >
+            <img class="vertline" src="https://icon-library.com/images/three-bar-menu-icon/three-bar-menu-icon-3.jpg" alt="">
+             <img class="disney-logo" src="https://github.com/pankaj5417/koovs.com/blob/main/icons/disney.png?raw=true" alt="">
+              <div class="navbar-menu">TV</div>
+              <div class="navbar-menu">Movies</div>
+              <div class="navbar-menu">Sports</div>
+              <div class="navbar-menu">Disney+</div>
+
+            </div>
+
+        <div id="navbar-right">
+            <div id="searchbar">
+                <div id="search-button">
+                    <input oninput="debounce(getMovie,1000)" type="text" class="search" id="movie-name" placeholder="enter movie name" >
+                    <img id="search-logo" src="https://github.com/pankaj5417/koovs.com/blob/main/icons/search-icon%20(1).png?raw=true" alt="">  
+                </div>
+                
+                <div class="hline"></div>
+
+
+             </div>
+           
+            <div id="subscribe-btn">SUBSCRIBE</div>
+            <div id="login-btn" >LOGIN</div>
+           
+        </div>
+ 
+    </div>
+    <div class="search-drop" id="search-dropdown"></div>
+</div>
+
+    <div class="slidebar1" id="slidebar"></div>
+    <div class="category-text">Latest and Trending</div>
+    <div id="movie-div"></div>
+</body>
+</html>
+<script>
+
+//slidebar
+let images=[
+   " https://github.com/pankaj5417/koovs.com/blob/main/icons/slideimg1.jpg?raw=true",
+    "https://github.com/pankaj5417/koovs.com/blob/main/icons/slideimg2.jpg?raw=true",
+    "https://github.com/pankaj5417/koovs.com/blob/main/icons/slideimg3.jpg?raw=true",
+    "https://github.com/pankaj5417/koovs.com/blob/main/icons/slideimg4.jpeg?raw=true",
+    "https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/1300/581300-h"
+]
+
+let container=document.getElementById('slidebar')
+  let interval;
+
+  function startSlideshow(){
+      let count=0;
+      let img=document.createElement('img')
+     img.className="slide-img"
+
+      img.src=images[0]
+      container.append(img)
+
+      count++
+       interval=setInterval(function(){
+          container.innerHTML=null
+          if(count===images.length){
+              count=0;
+          }
+          let img=document.createElement('img')
+         img.className="slide-img"
+          img.src=images[count]
+          container.append(img)
+          count++
+      },3000)
+  }
+  startSlideshow()
+  //function Stop(){
+ //     clearInterval(interval)
+ // }
+
+    async function getMovie(){
+        try{
+            let movie_name=document.getElementById("movie-name").value
+        let res=await fetch(`http://www.omdbapi.com/?apikey=8a493bfd&s=${movie_name}`)
+       // let res1=await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=ac0e095d5ca7ec68c7406d38019b52fa&language=en-US`)
+       // let data1=await res1.json()
+        let data=await res.json()
+        console.log(data)
+        let mvdata=data.Search
+        showMovie(mvdata)
+        }
+       catch(res){
+            console.log(res)
+        }
+        
+    }
+    async function defaultMovie(){
+        try{
+            let res1=await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=ac0e095d5ca7ec68c7406d38019b52fa&language=en-US`)
+       let data1=await res1.json()
+       showDefault(data1.results)
+        }catch(res){
+            console.log(res)
+        }
+    }
+    defaultMovie()
+   
+    var movie_div=document.getElementById("movie-div");
+
+     //default movie
+
+var searchDropdown=document.getElementById("search-dropdown")
+
+function showDefault(prod1){
+  movie_div.innerHTML=null;
+
+if(prod1==undefined){
+let giferr=document.createElement("img") 
+giferr.src="https://miro.medium.com/max/1400/1*zBFBJktPD3_z0S_35kO5Hg.gif"  
+movie_div.append(giferr) 
+} 
+prod1.forEach(function(product){
+
+
+let div=document.createElement("div");
+let mv_title=document.createElement("p");
+mv_title.innerText="Title :" +product.original_title;
+let mv_rating=document.createElement("p");
+mv_rating.innerText="Imdb :"+product.vote_average;
+let poster=document.createElement("img");
+poster.src=`https://image.tmdb.org/t/p/w500/${product.poster_path}`;
+let lang=document.createElement("p");
+lang.innerText="Language :"+ product.original_language;
+let runtime=document.createElement("p");
+runtime.innerText="Runtime :"+ product.Runtime;
+let actor=document.createElement("p");
+actor.innerText="Actors :"+ product.Actors;
+let genre=document.createElement("p");
+let recommend=document.createElement("p")
+recommend.innerText  ="Recommended";
+genre.innerText="Genre :"+ product.Genre;
+poster.className="poster-hover"
+poster.onclick=function(){
+ showData(product.original_title)
+}
+if(product.vote_average>8.5){
+ //   div.append(poster,mv_title,genre,lang,actor,runtime,mv_rating)     
+
+div.append(poster)     
+movie_div.append(div)
+// console.log(mv)
+}else{
+//div.append(poster,mv_title,genre,lang,actor,runtime,mv_rating)
+div.append(poster)     
+
+movie_div.append(div)
+// console.log(mv)
+}
+})
+}
+
+
+     //search movie
+
+    function showMovie(prod){
+        movie_div.innerHTML=null;
+
+        if(prod==undefined){
+        let giferr=document.createElement("img") 
+        giferr.src="https://miro.medium.com/max/1400/1*zBFBJktPD3_z0S_35kO5Hg.gif"  
+        movie_div.append(giferr) 
+        } 
+        prod.forEach(function(product){
+
+    // var movie_div=document.getElementById("movie-div");
+
+     let div=document.createElement("div");
+     let mv_title=document.createElement("p");
+    mv_title.innerText="Title :" +product.Title;
+   let mv_rating=document.createElement("p");
+   mv_rating.innerText="Imdb :"+product.imdbRating;
+   let poster=document.createElement("img");
+   poster.src=product.Poster;
+   let lang=document.createElement("p");
+   lang.innerText="Language :"+ product.Language;
+   let runtime=document.createElement("p");
+   runtime.innerText="Runtime :"+ product.Runtime;
+   let actor=document.createElement("p");
+   actor.innerText="Actors :"+ product.Actors;
+   let genre=document.createElement("p");
+   let recommend=document.createElement("p")
+   recommend.innerText  ="Recommended";
+   genre.innerText="Genre :"+ product.Genre;
+
+   div.style.width="22%"
+   div.style.height="200px"
+   div.style.display="flex"
+   poster.style.marginLeft="20px"
+   searchDropdown.style.height="500px"
+   searchDropdown.style.display="flex"
+   searchDropdown.style.flexDirection="column"
+   searchDropdown.style.width="22%"
+   searchDropdown.style.overflow="scroll"
+   searchDropdown.style.backgroundColor="#0c1a20"
+   mv_title.style.fontSize="13px"
+  // mv_title.style.display="flex"
+   mv_title.style.marginLeft="20px"
+   mv_title.style.marginTop="4px"
+   mv_title.style.marginTop="2%"
+   mv_title.style.color="white"
+
+  
+  
+   poster.style.width="250px"
+   poster.style.height="100px"
+   div.append(poster,mv_title)
+  
+  searchDropdown.appendChild(div)
+   if(product.imdbRating>8.5){
+    //div.append(poster,mv_title,genre,lang,actor,runtime,mv_rating,recommend)  
+    poster.onclick=function(){
+      showData(poster,mv_title,genre,lang,actor,runtime,mv_rating,recommend)
+   } 
+  
+  
+  // searchDropdown.append(poster,mv_title)
+   //console.log(mv)
+   }else{
+   // poster.append(mv_title,genre,lang,actor,runtime,mv_rating)     
+    //searchDropdown.append(poster,mv_title)
+   poster.onclick=function(){
+      showData(poster,mv_title,genre,lang,actor,runtime,mv_rating,recommend)
+   }    
+
+   console.log(movie_div)
+     }
+  })
+     
+    }
+    var timerid;
+
+    function debounce(func,delay) {
+        if(timerid){
+            clearTimeout(timerid)
+        }
+        timerid=setTimeout(function () {
+        func()
+            
+        },delay)
+    }
+
+//movie details
+
+    function showData(poster,title,genre,lang,actor,runtime,rating){
+     container.innerHTML=null
+     interval.clearInterval()
+        let div=document.createElement("div")
+        div.append(poster,title,genre,lang,actor,runtime,rating)
+       // div.append(poster)
+        container.append(div)
+    }
+</script>
