@@ -57,14 +57,15 @@
         background-color: white;
       }
       #navbar-right-left{
-        width: 80%;
+        width: 78%;
         display: flex;
         align-items: center;
         margin: 3px 6%;
       }
       #navbar-right-right{
         display: flex;
-        width: 20%;
+        align-items: center;
+        width: 22%;
       }
       .nav-right-logo,.sidebar-logo{
         width: 25px;
@@ -105,7 +106,7 @@
       }
       #left-sidebar{
         width: 100%;
-        height: 550px;
+        height: 580px;
         overflow:auto;
         position: sticky;
         left: 0;
@@ -149,6 +150,79 @@
       #category-container{
         display: flex;
       }
+
+      #login{
+        width: 20%;
+        height: 180px;
+        padding: 6px;
+        position: sticky ;
+        margin: -93% 0 0 79%;
+        background-color: white;
+        display: none;
+        box-shadow: -1px 1px 32px 3px rgba(40,40,57,0.77);
+       -webkit-box-shadow: -1px 1px 32px 3px rgba(40,40,57,0.77);
+       -moz-box-shadow: -1px 1px 32px 3px rgba(40,40,57,0.77);
+        border: 1px solid #070d11;
+    }
+
+      #signup{
+        width: 20%;
+        height: 340px;
+        position: sticky;
+        padding: 6px;
+        background-color: white;
+        box-shadow: -1px 1px 32px 3px rgba(40,40,57,0.77);
+       -webkit-box-shadow: -1px 1px 32px 3px rgba(40,40,57,0.77);
+       -moz-box-shadow: -1px 1px 32px 3px rgba(40,40,57,0.77);
+        margin: -94% 0 0 80%;
+display: none;
+        border: 1px solid #0d1418;
+    }
+    .inputbox input{
+        height: 20px;
+        margin: 1px 0 0 3%;
+        width:87%;
+        padding: 2px 0 0 5px;
+        border-radius: 5px;
+        outline: none;
+        border: none;
+        background-color:#0d1418 ;
+        color: white;
+
+    }
+    .inputbox{
+        background-color: #070d11;
+    }
+    .inputbox-hr{
+        width: 95%;
+        margin-left: 0 3%;
+    }
+    .login-btn2,.signup-btn2{
+        font-size: 14px;
+        font-weight: 500;
+        margin-right: 4px;
+
+    }
+    
+    
+    .login-button{
+        width: 60%;
+        height: 35px;
+        margin: 5% 20%;
+        background-color: #0c1a25;
+        color: white;
+        font-size: 20px;
+        font-weight: 500;
+        border-radius: 4px;
+    }
+    .closeBtn{
+        margin:2px 88%;
+    }
+    .closeBtn:hover{
+        background-color: red;
+        color: white;
+    }
+
     </style>
   </head>
   <body>
@@ -245,7 +319,9 @@
       <img class="nav-right-logo cursor" src="https://github.com/pankaj5417/koovs.com/blob/main/icons/create.png?raw=true" alt="">
       <img class="nav-right-logo cursor" src="https://github.com/pankaj5417/koovs.com/blob/main/icons/apps.png?raw=true" alt="">
       <img class="nav-right-logo cursor" src="https://github.com/pankaj5417/koovs.com/blob/main/icons/notifications.png?raw=true" alt="">
-         <div class=" cursor" id="profile"></div>
+      <div class="login-btn2 cursor" id="login-btn">Login</div>
+      <div class="signup-btn2 cursor" id="signup-btn">SignUp</div>
+
     </div>
   
   </div>
@@ -278,7 +354,45 @@
   </div>
 </div>
 
+<div class="signdiv" id="signup">
+  <form onsubmit="signup(event)" id="signup-form" action="">
+      <button id="closeBtn1" class="closeBtn"> ✖</button>
+  <div class="inputbox">
+
   
+      <input type="text" id="name" placeholder="Enter Name"  >
+      <hr>
+      <input type="email" id="email" placeholder="Enter email"  >
+      <hr>
+      <input type="password" id="password" placeholder="Enter password"  >
+      <hr>
+      <input type="number" id="mobile" placeholder="Enter mobile"  >
+      <hr>
+      <input type="text" id="username" placeholder="Enter username"  >
+      <hr>
+      <input type="text" id="description" placeholder="Enter description"  >
+      <hr>
+  </div>
+  <input type="submit" id="btn1" class="login-button" value="Sign Up">
+
+  </form>
+</div>
+
+<div class="logindiv" id="login">
+  <button id="closeBtn2" class="closeBtn"> ✖</button>
+
+  <form onsubmit="login(event)" id="login-form" action="">
+    <div class="inputbox">
+      <input type="text" id="username2" placeholder="Enter username"  >
+      <hr class="inputbox-hr">
+      <input type="password" id="password2" placeholder="Enter Password"  >
+      <hr class="inputbox-hr">
+  </div>
+      <input type="submit" id="btn2" class="login-button" value="Login">
+  
+  </form>
+</div>
+
 
     
   </body>
@@ -301,7 +415,7 @@
 }
 
 async function DefaultMovies(){
-  let res=await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${query}&type=video&key=AIzaSyCl0_-Pf-p8tUR5f0estmEO_e0iL2jiQQM&maxResults=20&part=snippet`)
+  let res=await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${query}&type=popular video&key=AIzaSyCl0_-Pf-p8tUR5f0estmEO_e0iL2jiQQM&maxResults=20&part=snippet`)
    
    var data= await res.json();
    console.log(data.items);
@@ -344,6 +458,7 @@ div.append(channelTitle,title,description)
 videos.append(div)
 });
 }
+/*
 let profile=document.getElementById("profile")
 let profile_img=document.createElement("img")
 profile_img.src="https://png.pngtree.com/png-vector/20191110/ourmid/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg"
@@ -351,5 +466,137 @@ profile.append(profile_img)
 profile_img.style.width="40px"
 profile_img.style.height="40px"
 profile_img.style.marginTop="5px"
+*/
+
+//login & signup page
+
+var signupBtn=document.getElementById("signup-btn")
+var loginBtn=document.getElementById("login-btn")
+//signupBtn.addEventListener("click",signup)
+//loginBtn.addEventListener("click",login)
+
+let closeBtn2=document.getElementById("closeBtn2")
+closeBtn2.onclick=function(){
+    let login1=document.getElementById("login")
+   
+        login1.style.display="none"
+    }
+    let closeBtn1=document.getElementById("closeBtn1")
+closeBtn1.onclick=function(){
+    let login1=document.getElementById("signup")
+   
+        login1.style.display="none"
+    }
+
+   loginBtn.onclick= function(){
+    let loginshow=document.getElementById("login")
+    //loginshow.innerHTML=null;
+    loginshow.style.display="block"
+   // loginshow.style.background="#0c1a25"
+}
+signupBtn.onclick=function(){
+    let signupshow=document.getElementById("signup")
+    //signupshow.innerHTML=null;
+    signupshow.style.display="block"
+   // signupshow.style.backgroundColor="#0c1a25"
+}
+var form=document.getElementById("signup-form")
+   
+
+//login &signup 
+function signup(e){
+        e.preventDefault()
+    let userdata={
+        name:form.name.value,
+        email:form.name.value,
+        password:form.password.value,
+        username:form.username.value,
+        description:form.description.value,
+        mobile:form.mobile.value
+    }
+    userdata=JSON.stringify(userdata)
+    fetch("http://masai-api-mocker.herokuapp.com/auth/register",{
+        method:"POST",
+        body:userdata,
+        headers:{
+            "Content-Type":"application/json"
+        },
+    })
+    .then((res)=>{
+        return res.json()
+    })
+    .then((res)=>{
+        console.log(res)
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+
+
+    }
+
+     function login(e){
+        e.preventDefault()
+        let form1=document.getElementById("login-form")
+     let userdata={
+        username:form1.username2.value,
+        password:form1.password2.value,
+        
+    }
+   let data_to_send=JSON.stringify(userdata)
+
+   fetch("http://masai-api-mocker.herokuapp.com/auth/login",{
+  method:"POST",
+  body:data_to_send,
+
+ headers:{
+            "Content-Type":"application/json"
+        },
+
+})
+.then((res)=>{
+   return res.json()
+})
+.then((res)=>{
+    console.log(res)
+    fetchData(userdata.username,res.token)
+})
+.catch((err)=>{
+    console.log(err)
+})
+}
+
+function fetchData(username,token){
+    fetch(`http://masai-api-mocker.herokuapp.com/user/${username}`,{
+        headers:{
+            "Content-Type":"application/json",
+          Authorization:`Bearer ${token}`,
+        },
+    })
+    .then((res)=>{
+   return res.json()
+})
+.then((res)=>{
+    console.log(res)
+    console.log(res.name)
+    if(res.name!=""){
+        let subBtn=document.getElementById("login-btn")
+        subBtn.innerText="Hello!,"+" "+res.name
+        subBtn.style.fontSize="14px"
+        subBtn.style.fontWeight="300"
+        let signupBtn=document.getElementById("signup-btn")
+        signupBtn.style.display="none"
+    }
+})
+.catch((err)=>{
+    console.log(err)
+})
+}
+
+
+function homepage(){
+    window.location.href="movie3.html"
+}
+</script>
 
 </script>
